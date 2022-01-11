@@ -1,0 +1,17 @@
+.App {
+  font-family: 'Roboto Slab';
+  text-align: center;
+  /* width: 70vw; */
+  padding-bottom: 60px;
+  background: #012d5e;
+}
+
+h1 {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  color: #ffc107;
+}
+
+h3 {
+  margin-top: 0;
+}

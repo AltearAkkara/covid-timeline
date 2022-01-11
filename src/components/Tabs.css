@@ -1,0 +1,73 @@
+  .tabs-component [role="tablist"] {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 2px solid #254870;
+    position: relative;
+  }
+
+  .tabs-component [role="tablist"] button {
+    border-width: 2px;
+    border-style: solid;
+    /* border-color: transparent; */
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    display: block;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    /* margin: 0 1px; */
+    outline: none;
+    color: white;
+    background-color: #012d5e;
+    transition: border 0.2s ease-in-out 0s;
+    border-color: #254870 #254870 #012d5e;
+    margin-left: 10px;
+  }
+
+  .tabs-component [role="tablist"] button.active,
+  .tabs-component [role="tablist"] button:focus,
+  .tabs-component [role="tablist"] button:hover {
+    border-width: 2px;
+    border-color: #254870 #254870 #254870;
+  }
+
+  .tabs-component [role="tablist"] button.active {
+    color:  #ffc107;
+    background-color: #012d5e;
+    margin-left: 10px;
+    /* border-bottom-width: 0px; */
+    border-bottom-color: #012d5e;
+  }
+
+  .tabs-component [role="tabpanel"] {
+    text-align: left;
+    /* padding: 1rem; */
+    background-color: #012d5e;
+    /* box-shadow: 1px 1px 2px rgb(204 204 204 / 75%); */
+  }
+
+  .tabs-component.vertical {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .tabs-component.vertical [role="tablist"] {
+    flex-direction: column;
+  }
+
+  .tabs-component.vertical [role="tabpanel"] {
+    flex: 1;
+  }
+
+  .tabs-component [role="tablist"] button {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin: 10;
+    height: 100px;
+  }
+
+  .tabs-component.vertical [role="tablist"] button.active,
+  .tabs-component.vertical [role="tablist"] button:focus,
+  .tabs-component.vertical [role="tablist"] button:hover {
+    border-color: #e9ecef transparent #e9ecef #b41c1c;
+  }

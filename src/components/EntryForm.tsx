@@ -9,16 +9,19 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { DateTimePicker, TimePicker } from "@mui/lab";
 import { TextField, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
-// import { purple } from "@mui/material/colors";
+import { purple, green } from "@mui/material/colors";
 // import { LocationType } from "../models/Entry";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#fff",
+      main: purple[500],
     },
     secondary: {
-      main: "#fff",
+      main: green[500],
+    },
+    info: {
+      main: green[500],
     },
   },
 });
@@ -117,7 +120,6 @@ const EntryForm: React.FC<Props> = ({ onAddEntryHandler }) => {
                 type="text"
                 placeholder="Large text"
                 ref={locationRefInput}
-                // disabled={ (+(locationTypeRefInput.current!.value) === LocationType.HOME) || (+(locationTypeRefInput.current!.value) === LocationType.TRAVELLING)}
               />
             </Col>
           </Row>

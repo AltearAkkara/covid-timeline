@@ -27,7 +27,7 @@ export class Patient {
     this._gender = gender;
     this._age = age;
     this._occupation = occupation;
-    this._timeline = [];
+    this._timeline = mockEntries;
   }
 
   get gender() {
@@ -54,7 +54,7 @@ export class Patient {
   }
 
   public removeEntry(entry: Entry) {
-    this._timeline.filter(item => item._id !== entry._id);
+    this._timeline = this._timeline.filter(item => item._id !== entry._id);
   }
 
   public toString() {

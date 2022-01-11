@@ -3,6 +3,7 @@ import {
     IsNumber,
     IsPositive
   } from "class-validator";
+  import moment from "moment";
 
 export class Entry {
   _id: string;
@@ -26,6 +27,22 @@ export class Entry {
     if(location) {
         this._location = location;
     }
+  }
+
+  get entryDate () {
+    return moment(this._timeFrom).format("DD/MM/YYYY")
+  }
+
+  get entryFromTime () {
+    return this._timeFrom.toLocaleTimeString('th-TH');
+  }
+
+  get entryToTime () {
+    return this._timeTo.toLocaleTimeString('th-TH');
+  }
+
+  get timestamp() {
+    return this._timeFrom.getTime();
   }
 }
 

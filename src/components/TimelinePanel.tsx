@@ -9,20 +9,22 @@ import TimelineInformation from "./TimelineInformation";
 
 type Props = {
   patientData: Patient;
-  onAddPatientTimeline: (fromValue: any,
+  onAddPatientTimeline: (
+    fromValue: any,
     toValue: any,
     detail: any,
     locationType: any,
-    location: any) => void;
+    location: any
+  ) => void;
+  onRemovePatientTimeline: (entry: Entry) => void;
   timeline: Entry[];
-  trigger: number;
 };
 
 const TimelinePanel: React.FC<Props> = ({
   patientData,
   onAddPatientTimeline,
   timeline,
-  trigger
+  onRemovePatientTimeline
 }) => {
   useEffect(() => {
     // console.log(patientData);
@@ -59,11 +61,11 @@ const TimelinePanel: React.FC<Props> = ({
       <Col md={7}>
         <TimelineInformation
           patientData={patientData}
-          timeline={timeline}
+          onRemovePatientTimeline={onRemovePatientTimeline}
         ></TimelineInformation>
       </Col>
       <Col md={5}>
-        <EntryForm onAddEntryHandler={onAddPatientTimeline}></EntryForm>
+        <EntryForm onAddEntryHandler={onAddPatientTimeline} ></EntryForm>
       </Col>
     </Row>
   );

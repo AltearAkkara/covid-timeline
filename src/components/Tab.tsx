@@ -49,6 +49,29 @@ const Tab: FC<{
     // prop.patientData._timeline.push(newEntry);
     setTimeline(prop.patientData._timeline);
   };
+
+  const removePatientTimeline = (entry: Entry) => {
+    // setTimeline((prevTabs) => {
+    //   const removedTab = prevTabs.filter((tab) => tab.index !== tabIndex);
+    //   const result: Tab[] = removedTab.map((tab) => {
+    //     if (tab.index > tabIndex) {
+    //       return {
+    //         patient: tab.patient,
+    //         id: tab.id,
+    //         index: tab.index - 1,
+    //       };
+    //     }
+    //     return tab;
+    //   });
+    //   return result;
+    // });
+    console.log(entry);
+    prop.patientData.removeEntry(entry);
+    console.log(prop.patientData);
+    // prop.patientData._timeline.push(newEntry);
+    setTimeline(prop.patientData._timeline);
+  }
+
   return (
     <div className="Tab">
       {/* <style type="text/css">
@@ -111,7 +134,7 @@ const Tab: FC<{
             patientData={prop.patientData}
             timeline={prop.patientData._timeline}
             onAddPatientTimeline={addPatientTimeline}
-            trigger={prop.patientData.timeline.length}
+            onRemovePatientTimeline={removePatientTimeline}
           ></TimelinePanel>
         </Container>
       </div>

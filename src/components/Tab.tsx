@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { Container, Button, Row, Col, Card, Form } from "react-bootstrap";
 import { Patient } from "../models/Patient";
 import "./Tab.css";
-import { Chrono } from "react-chrono";
+// import { Chrono } from "react-chrono";
 import BaseInormation from "./BaseInformation";
 import TimelinePanel from "./TimelinePanel";
 import { Entry, LocationType } from "../models/Entry";
@@ -16,22 +16,38 @@ const Tab: FC<{
 }> = (prop) => {
   const [timelines, setTimeline] = useState<Entry[]>(prop.patientData.timeline);
 
-  const addPatientTimeline = () => {
+  const addPatientTimeline = (
+    fromValue: any,
+    toValue: any,
+    detail: any,
+    locationType: any,
+    location: any
+  ) => {
+    // console.log(typeof fromValue,typeof toValue, detail, locationType, location);
+    const newEntry = new Entry(
+      fromValue,
+      toValue,
+      detail,
+      locationType,
+      location
+    );
+    // setTimeline((prevTimeline) => {
+    //   // console.log('pat', prop.patientData);
+    //   // console.log('prev', prevTimeline);
+    //   // console.log('time', timelines);
+    //   // prop.patientData.addEntry(newEntry);
+    //   prop.patientData._timeline = prop.patientData._timeline.concat(newEntry);
+    //   console.log(prop.patientData._timeline);
+    //   console.log(prop.patientData._timeline.length);
+    //   const result = prop.patientData._timeline.concat(newEntry);
+    //   // prop.patientData._timeline.push(newEntry);
+    //   return result;
+    // });
 
-    const newEntry = new Entry(new Date(), new Date(), "555", LocationType.HOME, "'");
-    // tabs[selectedTab].patient.addEntry(newEntry);
-    console.log(555);
-    setTimeline((prevTimeline) => {
-      console.log('pat', prop.patientData);
-      console.log('prev', prevTimeline);
-      console.log('time', timelines);
-      // const newEntry = new Entry(new Date(), new Date(), "555", LocationType.HOME, "'");
-      prop.patientData.addEntry(newEntry);
-      return prop.patientData._timeline;
-    });
-    // console.log(prop.patientData);
-    // prop.patientData.addEntry(newEntry);
-    // console.log(prop.patientData.timeline.length);
+    // prop.patientData._timeline = prop.patientData._timeline.concat(newEntry)
+    prop.patientData.addEntry(newEntry);
+    // prop.patientData._timeline.push(newEntry);
+    setTimeline(prop.patientData._timeline);
   };
   return (
     <div className="Tab">

@@ -9,7 +9,11 @@ import TimelineInformation from "./TimelineInformation";
 
 type Props = {
   patientData: Patient;
-  onAddPatientTimeline: () => void;
+  onAddPatientTimeline: (fromValue: any,
+    toValue: any,
+    detail: any,
+    locationType: any,
+    location: any) => void;
   timeline: Entry[];
   trigger: number;
 };
@@ -21,9 +25,9 @@ const TimelinePanel: React.FC<Props> = ({
   trigger
 }) => {
   useEffect(() => {
-    console.log(patientData);
-    console.log(timeline);
-    console.log(trigger);
+    // console.log(patientData);
+    // console.log(timeline);
+    // console.log(trigger);
   });
   // const [timeline, setTimeline] = useState<Entry[]>(patientData.timeline);
 

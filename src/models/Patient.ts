@@ -21,7 +21,7 @@ export class Patient {
   @IsNotEmpty()
   private _occupation: string;
 
-  public _timeline: Entry[];
+  public _timeline: any[];
 
   constructor(gender: string, age: number, occupation: string) {
     this._gender = gender;
@@ -47,8 +47,10 @@ export class Patient {
   }
 
   public addEntry(entry: Entry) {
-    // this._timeline.concat(entry);
     this._timeline = this._timeline.concat(entry);
+    // this._timeline.push('');
+    // this._timeline.concat(entry);
+    // this._timeline.push(entry);
   }
 
   public removeEntry(entry: Entry) {

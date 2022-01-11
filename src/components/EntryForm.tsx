@@ -1,13 +1,45 @@
 // tabtitle.tsx
 
-import React, { useCallback } from "react";
+import React, { useState, useRef } from "react";
 import { Container, Button, Row, Col, Card, Form } from "react-bootstrap";
-import { Patient } from "../models/Patient";
+// import { Patient } from "../models/Patient";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+// import Typography from "@mui/material/Typography";
+import { DateTimePicker, TimePicker } from "@mui/lab";
+import { TextField, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+// import { purple } from "@mui/material/colors";
+// import { LocationType } from "../models/Entry";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#fff",
+    },
+    secondary: {
+      main: "#fff",
+    },
+  },
+});
+
 type Props = {
-  onAddEntryHandler: () => void;
+  onAddEntryHandler: (
+    fromValue: any,
+    toValue: any,
+    detail: any,
+    locationType: any,
+    location: any
+  ) => void;
 };
 
-const EntryForm: React.FC<Props> = ({onAddEntryHandler}) => {
+const EntryForm: React.FC<Props> = ({ onAddEntryHandler }) => {
+  const [fromValue, setFromValue] = useState(new Date());
+  const [toValue, setToValue] = useState(new Date());
+  const locationTypeRefInput = useRef<HTMLSelectElement>(null);
+  const locationRefInput = useRef<HTMLInputElement>(null);
+  const detailRefInput = useRef<HTMLTextAreaElement>(null);
+
   return (
     <Card
       style={{
@@ -25,11 +57,31 @@ const EntryForm: React.FC<Props> = ({onAddEntryHandler}) => {
           >
             <Col md={8}>
               <Form.Label style={{ color: "#fff" }}>From</Form.Label>
-              <Form.Control type="text" placeholder="Large text" />
+              {/* <Form.Control type="text" placeholder="Large text" /> */}
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DateTimePicker
+                  renderInput={(props) => <TextField {...props} />}
+                  // label="DateTimePicker"
+                  value={fromValue}
+                  onChange={(newValue) => {
+                    setFromValue(newValue!);
+                  }}
+                />
+              </LocalizationProvider>
             </Col>
             <Col md={4}>
               <Form.Label style={{ color: "#fff" }}>To</Form.Label>
-              <Form.Control type="text" placeholder="Large text" />
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <ThemeProvider theme={theme}>
+                  <TimePicker
+                    value={toValue}
+                    onChange={(newValue) => {
+                      setToValue(newValue!);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </ThemeProvider>
+              </LocalizationProvider>
             </Col>
           </Row>
           <Row
@@ -39,7 +91,7 @@ const EntryForm: React.FC<Props> = ({onAddEntryHandler}) => {
           >
             <Col>
               <Form.Label style={{ color: "#fff" }}>Detail</Form.Label>
-              <Form.Control as="textarea" rows={6} />
+              <Form.Control as="textarea" rows={6} ref={detailRefInput} />
             </Col>
           </Row>
           <Row
@@ -49,16 +101,24 @@ const EntryForm: React.FC<Props> = ({onAddEntryHandler}) => {
           >
             <Col md={5}>
               <Form.Label style={{ color: "#fff" }}>Location Type</Form.Label>
-              <Form.Select aria-label="Default select example">
-                <option value="0">INDOOR</option>
-                <option value="1">OUTDOOR</option>
-                <option value="2">HOME</option>
-                <option value="3">TRAVELLING</option>
+              <Form.Select
+                aria-label="Default select example"
+                ref={locationTypeRefInput}
+              >
+                <option value="0">Indoor</option>
+                <option value="1">Outdoor</option>
+                <option value="2">Home</option>
+                <option value="3">Travelling</option>
               </Form.Select>
             </Col>
             <Col md={7}>
               <Form.Label style={{ color: "#fff" }}>Location</Form.Label>
-              <Form.Control type="text" placeholder="Large text" />
+              <Form.Control
+                type="text"
+                placeholder="Large text"
+                ref={locationRefInput}
+                // disabled={ (+(locationTypeRefInput.current!.value) === LocationType.HOME) || (+(locationTypeRefInput.current!.value) === LocationType.TRAVELLING)}
+              />
             </Col>
           </Row>
           <Row
@@ -72,7 +132,15 @@ const EntryForm: React.FC<Props> = ({onAddEntryHandler}) => {
                 background: "#ffc107",
                 padding: "10px",
               }}
-              onClick={() => onAddEntryHandler()}
+              onClick={() =>
+                onAddEntryHandler(
+                  fromValue,
+                  toValue,
+                  detailRefInput.current!.value,
+                  +(locationTypeRefInput.current!.value),
+                  locationRefInput.current!.value
+                )
+              }
             >
               + Add Entry
             </Button>

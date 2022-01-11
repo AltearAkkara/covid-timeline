@@ -1,7 +1,7 @@
 // tabtitle.tsx
 
 import React, { useCallback } from "react";
-import { Container,Row, Col, Card, Form } from "react-bootstrap";
+import { Container, Row, Col, Card, Form } from "react-bootstrap";
 import { Patient } from "../models/Patient";
 
 type Props = {
@@ -29,18 +29,32 @@ const BaseInormation: React.FC<Props> = ({ patientData }) => {
               <Row>
                 <Col md={4}>
                   <Form.Label style={{ color: "#fff" }}>Gender</Form.Label>
-                  <Form.Select aria-label="Default select example" defaultValue={patientData.gender}>
+                  <Form.Select
+                    aria-label="Default select example"
+                    value={patientData.gender}
+                    onChange={() => {}}
+                  >
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                   </Form.Select>
                 </Col>
                 <Col md={4}>
                   <Form.Label style={{ color: "#fff" }}>Age</Form.Label>
-                  <Form.Control type="text" placeholder="Age" defaultValue={patientData.age} />
+                  <Form.Control
+                    type="text"
+                    placeholder="Age"
+                    value={patientData.age}
+                    onChange={() => {}}
+                  />
                 </Col>
                 <Col md={4}>
                   <Form.Label style={{ color: "#fff" }}>Occupation</Form.Label>
-                  <Form.Control type="text" placeholder="Occupation" defaultValue={patientData.occupation}/>
+                  <Form.Control
+                    type="text"
+                    placeholder="Occupation"
+                    value={patientData.occupation}
+                    onChange={() => {}}
+                  />
                 </Col>
               </Row>
             </Container>

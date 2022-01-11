@@ -5,10 +5,18 @@ import { Container, Button, Row, Col, Card, Form } from "react-bootstrap";
 import { Entry } from "../models/Entry";
 import { Patient } from "../models/Patient";
 // import { mockEntries } from "../mock/entries";
+import Timeline from "@mui/lab/Timeline";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import TimelineConnector from "@mui/lab/TimelineConnector";
+import TimelineContent from "@mui/lab/TimelineContent";
+import TimelineDot from "@mui/lab/TimelineDot";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+import _ from "lodash";
 
 type Props = {
   patientData: Patient;
-  timeline: Entry[]
+  timeline: Entry[];
 };
 
 const TimelineInformation: React.FC<Props> = ({ patientData, timeline }) => {
@@ -59,21 +67,39 @@ const TimelineInformation: React.FC<Props> = ({ patientData, timeline }) => {
               paddingTop: "30px",
             }}
           >
+            <Timeline>
+              {patientData.timeline.map((entry: Entry, index: any) => (
+                <TimelineItem>
+                  <TimelineOppositeContent color="#ffc107">
+                    {entry._timeFrom.toLocaleDateString()}
+                  </TimelineOppositeContent>
+                  <TimelineSeparator>
+                    <TimelineDot />
+                    <TimelineConnector />
+                  </TimelineSeparator>
+                  <TimelineContent>
+                    <Card>
+                    {entry._detail}
+                    </Card>
+                  </TimelineContent>
+                </TimelineItem>
+              ))}
+            </Timeline>
             {/* <Chrono items={data} mode="VERTICAL" /> */}
-            <h4>Latest News</h4>
+            {/* <h4>Latest News</h4>
             <ul className="timeline">
-              {timeline.map((entry: Entry, index: any) => (
+              {patientData.timeline.map((entry: Entry, index: any) => (
                 <li key={index}>
                   <a target="_blank" href="https://www.totoprayogo.com/#">
                     {entry._locationType}
                   </a>
                   <a href="#" className="float-right">
-                    {entry._timeFrom.toISOString()}
+                    {entry._timeFrom.toLocaleDateString()}
                   </a>
                   <p>{entry._detail}</p>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </Row>
           <Row
             style={{
@@ -86,13 +112,21 @@ const TimelineInformation: React.FC<Props> = ({ patientData, timeline }) => {
               </Form.Label>
             </Col>
             <Col md={12}>
-              <Form.Label style={{ color: "#fff" }}>sorted places</Form.Label>
+              <li style={{ color: "#fff" }}> {getVisitedPlaces(patientData)} </li>
             </Col>
           </Row>
         </Container>
       </Card.Body>
     </Card>
   );
+};
+
+const getVisitedPlaces = (patient: Patient) => {
+  const places = _.map(patient.timeline, (entry) => {
+    return `${entry._location}     `
+  });
+  const uniqePlaces = _.sortedUniq(places);
+  return uniqePlaces.toString();
 };
 
 export default TimelineInformation;

@@ -10,7 +10,10 @@ import { Entry, LocationType } from "./models/Entry";
 
 function App() {
   const [selectedTab, setSelectedTab] = useState<number>(0);
-  const [tabs, setTabs] = useState<Tab[]>([]);
+  const [tabs, setTabs] = useState<Tab[]>([
+    new Tab(new Patient("s", 1, "s"), 1),
+    new Tab(new Patient("a", 15, "a"), 2),
+  ]);
   const [isOpen, setIsOpen] = useState(false);
   // const [timeline, setTimeline] = useState<Entry[]>(
   //   // tabs[selectedTab - 1].patient.timeline

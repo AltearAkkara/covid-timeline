@@ -168,7 +168,8 @@ const groupedTimeline = (patient: Patient) => {
     return new Date(a).getTime() - new Date(b).getTime();
   });
   return sortedKey.map((key) => {
-    return tl[key];
+    const entryList: Entry[] = tl[key];
+    return (_.orderBy(entryList, 'entryFromTime', ['asc']));
   });
 };
 

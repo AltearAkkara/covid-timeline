@@ -1,14 +1,11 @@
-import React, { FC } from "react";
-import { Entry } from "../models/Entry";
+import { FC } from "react";
 import { Patient } from "../models/Patient";
 import Tab from "./Tab";
-// import  from "../models/Tab"
 import "./Tabs.css";
 type TabsProps = {
   tabs: {
     patient: Patient;
     index: number;
-    // Component: FC<{ index: number }>;
   }[];
   selectedTab: number;
   onClick: (index: number) => void;
@@ -16,8 +13,6 @@ type TabsProps = {
   className?: string;
   onAddTabHandler: () => void;
   onRemoveTabHandler: (tabIndex: number) => void;
-  // onAddPatientTimeline: () => void;
-  // timeline: Entry[];
 };
 
 const Tabs: FC<TabsProps> = ({
@@ -27,9 +22,7 @@ const Tabs: FC<TabsProps> = ({
   onClick,
   orientation = "horizontal",
   onAddTabHandler,
-  onRemoveTabHandler,
-  // onAddPatientTimeline,
-  // timeline
+  onRemoveTabHandler
 }) => {
   const Panel = tabs && tabs.find((tab) => tab.index === selectedTab);
   return (
@@ -51,14 +44,13 @@ const Tabs: FC<TabsProps> = ({
             tabIndex={selectedTab === tab.index ? 0 : -1}
             id={`btn-${tab.index}`}
           >
-            {/* {tab.label} */}
             {"Patient"}
             {tab.index}
           </button>
         ))}
 
         {!isMaximumPatients(tabs) && (
-          <button onClick={() => onAddTabHandler()}>Add</button>
+          <button className = "add" onClick={() => onAddTabHandler()}> + </button>
         )}
       </div>
       <div
@@ -70,9 +62,7 @@ const Tabs: FC<TabsProps> = ({
           <Tab
             index={selectedTab}
             onRemovePatient={onRemoveTabHandler}
-            // onAddPatientTimeline={onAddPatientTimeline}
             patientData={getSeclectedTabByIndex(tabs, selectedTab).patient}
-            // timeline={timeline}
           />
         )}
       </div>
@@ -85,7 +75,7 @@ const isMaximumPatients = (patientList: any[]) => {
 };
 
 const getSeclectedTabByIndex: any = (tabs: any[], index: number) => {
-  return tabs.find((tab) => tab.index == index);
+  return tabs.find((tab) => tab.index === index);
 };
 
 export default Tabs;

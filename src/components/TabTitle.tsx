@@ -1,5 +1,3 @@
-// tabtitle.tsx
-
 import React, { useCallback } from "react"
 
 type Props = {

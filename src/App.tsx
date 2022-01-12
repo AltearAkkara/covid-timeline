@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Tabs from "./components/Tabs";
 import "./App.css";
 import Tab from "./models/Tab";
@@ -6,19 +6,11 @@ import { Patient } from "./models/Patient";
 import { validate } from "class-validator";
 import { Container, Row } from "react-bootstrap";
 import PatientForm from "./components/PatientForm";
-import { Entry, LocationType } from "./models/Entry";
 
 function App() {
   const [selectedTab, setSelectedTab] = useState<number>(0);
-  const [tabs, setTabs] = useState<Tab[]>([
-    new Tab(new Patient("s", 1, "s"), 1),
-    new Tab(new Patient("a", 15, "a"), 2),
-  ]);
+  const [tabs, setTabs] = useState<Tab[]>([]);
   const [isOpen, setIsOpen] = useState(false);
-  // const [timeline, setTimeline] = useState<Entry[]>(
-  //   // tabs[selectedTab - 1].patient.timeline
-  //   []
-  // );
 
   const showModal = () => {
     setIsOpen(true);
@@ -44,35 +36,6 @@ function App() {
       }
     });
   };
-
-  // const addPatientTimeline = () => {
-  //   // tabs[selectedTab - 1].patient.addEntry(newEntry);
-  //   setTimeline((prevTimeline) => {
-  //     // console.log(patientData);
-  //     // console.log(prevTimeline);
-  //     const newEntry = new Entry(
-  //       new Date(),
-  //       new Date(),
-  //       "555",
-  //       LocationType.HOME,
-  //       "'"
-  //     );
-  //     // patientData.addEntry(newEntry);
-  //     return prevTimeline.concat(newEntry);
-  //   });
-  //   const newEntry = new Entry(
-  //     new Date(),
-  //     new Date(),
-  //     "555",
-  //     LocationType.HOME,
-  //     "'"
-  //   );
-  //   tabs[selectedTab - 1].patient.addEntry(newEntry);
-  // };
-
-  // const addTabHandler = () => {
-  //   showModal();
-  // };
 
   const removeTab = (tabIndex: number) => {
     setTabs((prevTabs) => {
@@ -110,8 +73,6 @@ function App() {
             tabs={tabs}
             onAddTabHandler={showModal}
             onRemoveTabHandler={removeTab}
-            // onAddPatientTimeline={addPatientTimeline}
-            // timeline={timeline}
           />
         </Row>
       </Container>

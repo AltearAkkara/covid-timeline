@@ -1,18 +1,12 @@
-// tabtitle.tsx
-
 import React, { useRef } from "react";
 import {
-  Container,
   Button,
   Row,
   Col,
-  Card,
   Form,
   Modal,
 } from "react-bootstrap";
-import { Patient } from "../models/Patient";
 type Props = {
-  // patientData: Patient;
   isOpen: boolean;
   onHideHandler: () => void;
   onSubmitHandler: (gender: string, age: number, occupation: string) => void;

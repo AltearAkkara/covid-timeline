@@ -1,16 +1,11 @@
-// tabtitle.tsx
-
 import React, { useState, useRef } from "react";
 import { Container, Button, Row, Col, Card, Form } from "react-bootstrap";
-// import { Patient } from "../models/Patient";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-// import Typography from "@mui/material/Typography";
 import { DateTimePicker, TimePicker } from "@mui/lab";
 import { TextField, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { purple, green } from "@mui/material/colors";
-// import { LocationType } from "../models/Entry";
 
 const theme = createTheme({
   palette: {
@@ -60,11 +55,9 @@ const EntryForm: React.FC<Props> = ({ onAddEntryHandler }) => {
           >
             <Col md={8}>
               <Form.Label style={{ color: "#fff" }}>From</Form.Label>
-              {/* <Form.Control type="text" placeholder="Large text" /> */}
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DateTimePicker
                   renderInput={(props) => <TextField {...props} />}
-                  // label="DateTimePicker"
                   value={fromValue}
                   onChange={(newValue) => {
                     setFromValue(newValue!);

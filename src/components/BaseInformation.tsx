@@ -1,6 +1,5 @@
-// tabtitle.tsx
 
-import React, { useCallback } from "react";
+import React from "react";
 import { Container, Row, Col, Card, Form } from "react-bootstrap";
 import { Patient } from "../models/Patient";
 

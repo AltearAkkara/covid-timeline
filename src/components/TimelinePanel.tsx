@@ -1,8 +1,6 @@
-// tabtitle.tsx
-
-import React, { useState, useEffect } from "react";
-import { Container, Button, Row, Col, Card, Form } from "react-bootstrap";
-import { Entry, LocationType } from "../models/Entry";
+import React from "react";
+import { Row, Col } from "react-bootstrap";
+import { Entry } from "../models/Entry";
 import { Patient } from "../models/Patient";
 import EntryForm from "./EntryForm";
 import TimelineInformation from "./TimelineInformation";
@@ -26,32 +24,6 @@ const TimelinePanel: React.FC<Props> = ({
   timeline,
   onRemovePatientTimeline
 }) => {
-  useEffect(() => {
-    // console.log(patientData);
-    // console.log(timeline);
-    // console.log(trigger);
-  });
-  // const [timeline, setTimeline] = useState<Entry[]>(patientData.timeline);
-
-  // const addEntry = () => {
-  //   // setTimeline((prevTimeline) => {
-  //   //   console.log(patientData);
-  //   //   console.log(prevTimeline);
-  //   //   const newEntry = new Entry(new Date(), new Date(), "555", LocationType.HOME, "'");
-  //   //   patientData.addEntry(newEntry);
-  //   //   return prevTimeline.concat(newEntry);
-  //   // });
-  //   console.log(patientData);
-  //   patientData.addEntry(new Entry(new Date(), new Date(), "555", LocationType.HOME, "'"));
-  //   setTimeline(patientData.timeline);
-  // };
-
-  // const removeEntry = (entryId: string) => {
-  //   setTimeline((prevTimeline) => {
-  //     return prevTimeline.filter((entry) => entry._id !== entryId);
-  //   });
-  // };
-
   return (
     <Row
       style={{

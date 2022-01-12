@@ -5,7 +5,6 @@ import {
   Min,
   Max
 } from "class-validator";
-import { mockEntries } from "../mock/entries";
 import { Entry } from "./Entry";
 
 export class Patient {
@@ -27,7 +26,7 @@ export class Patient {
     this._gender = gender;
     this._age = age;
     this._occupation = occupation;
-    this._timeline = mockEntries;
+    this._timeline = [];
   }
 
   get gender() {
@@ -48,13 +47,10 @@ export class Patient {
 
   public addEntry(entry: Entry) {
     this._timeline = this._timeline.concat(entry);
-    // this._timeline.push('');
-    // this._timeline.concat(entry);
-    // this._timeline.push(entry);
   }
 
   public removeEntry(entry: Entry) {
-    this._timeline = this._timeline.filter(item => item._id !== entry._id);
+    this._timeline = this._timeline.filter((item: Entry) => item.id !== entry.id);
   }
 
   public toString() {

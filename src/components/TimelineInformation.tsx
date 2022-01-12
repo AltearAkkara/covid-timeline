@@ -1,10 +1,7 @@
-// tabtitle.tsx
-
-import React, { useCallback } from "react";
+import React from "react";
 import { Container, Button, Row, Col, Card, Form } from "react-bootstrap";
 import { Entry } from "../models/Entry";
 import { Patient } from "../models/Patient";
-// import { mockEntries } from "../mock/entries";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
@@ -42,12 +39,13 @@ const TimelineInformation: React.FC<Props> = ({ patientData, onRemovePatientTime
                 textAlign: "center",
               }}
             >
-              <Button
-                size="lg"
+              <Card
                 style={{
                   color: "#000",
                   background: "#ffc107",
                   padding: "10px",
+                  width: "50%",
+                  margin: "auto"
                 }}
               >
                 <Row>
@@ -59,7 +57,7 @@ const TimelineInformation: React.FC<Props> = ({ patientData, onRemovePatientTime
                 <Row>
                   <p>{patientData.occupation}</p>
                 </Row>
-              </Button>
+              </Card>
             </Col>
           </Row>
           <Row
@@ -105,14 +103,12 @@ const TimelineInformation: React.FC<Props> = ({ patientData, onRemovePatientTime
                                 <Col md={7}>
                                   <Row>
                                     <h6 style={{ color: "#fff" }}>
-                                      {entry._detail}
+                                      {entry.detail}
                                     </h6>
                                   </Row>
                                   <Row>
                                     <h6 style={{ color: "#5882E3" }}>
-                                      {entry._locationType +
-                                        "-" +
-                                        entry._location}
+                                      {entry.locationDetail}
                                     </h6>
                                   </Row>
                                 </Col>
@@ -130,21 +126,6 @@ const TimelineInformation: React.FC<Props> = ({ patientData, onRemovePatientTime
                 )
               )}
             </Timeline>
-            {/* <Chrono items={data} mode="VERTICAL" /> */}
-            {/* <h4>Latest News</h4>
-            <ul className="timeline">
-              {patientData.timeline.map((entry: Entry, index: any) => (
-                <li key={index}>
-                  <a target="_blank" href="https://www.totoprayogo.com/#">
-                    {entry._locationType}
-                  </a>
-                  <a href="#" className="float-right">
-                    {entry._timeFrom.toLocaleDateString()}
-                  </a>
-                  <p>{entry._detail}</p>
-                </li>
-              ))}
-            </ul> */}
           </Row>
           <Row
             style={{
@@ -168,28 +149,24 @@ const TimelineInformation: React.FC<Props> = ({ patientData, onRemovePatientTime
 
 const getVisitedPlaces = (patient: Patient) => {
   const places = _(
-    patient.timeline.filter((entry) => entry._location !== undefined)
-  )
+    patient.timeline.filter((entry) => entry._location !== undefined))
     .map((entry) => {
       return `${entry._location}`;
     })
     .uniq()
     .orderBy()
     .value();
-  // const uniqePlaces = _.uniq(places).filter((place) => place !== 'undefined');
-  // return _.orderBy(uniqePlaces).toString();
-  return places.toString();
+  return (places.length)? places.reduce((accumPlace, nextPlace) => {
+    return `${accumPlace} , ${nextPlace}`
+  }) : '';
 };
 
 const groupedTimeline = (patient: Patient) => {
   const tl = _(patient.timeline).groupBy("entryDate").value();
-  // console.log(tl);
   const keys = Object.keys(tl);
-  // console.log(keys);
   const sortedKey = keys.sort((a, b) => {
     return new Date(a).getTime() - new Date(b).getTime();
   });
-  console.log(sortedKey);
   return sortedKey.map((key) => {
     return tl[key];
   });
